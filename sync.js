@@ -53,7 +53,7 @@ function writeFileSync(path, data) {
 }
 
 function unlinkSync(path) {
-    FileUtils.deleteQuietly(root.resolve(path).toFile());
+    return FileUtils.deleteQuietly(root.resolve(path).toFile());
 }
 
 function renameSync(oldPath, newPath) {
