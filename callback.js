@@ -57,10 +57,22 @@ function rename(oldPath, newPath, callback) {
     });
 }
 
+function readDir(path, callback) {
+    CompletableFuture.runAsync(() => {
+        try {
+            let res = fs.readDirSync(path);
+            callback(res);
+        } catch (e) {
+            callback(e);
+        }
+    });
+}
+
 module.exports = {
     readFile,
     appendFile,
     writeFile,
     unlink,
     rename,
+    readDir
 };

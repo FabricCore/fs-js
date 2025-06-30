@@ -1,11 +1,11 @@
 let StandardCharsets = java.nio.charset.StandardCharsets;
 
 function fromEncoding(encoding) {
-    if(encoding instanceof java.lang.String) {
+    if (encoding instanceof java.lang.String) {
         encoding = '' + encoding;
     }
 
-    if(typeof encoding != "string") {
+    if (typeof encoding != "string") {
         return encoding;
     }
 
@@ -21,7 +21,7 @@ function fromEncoding(encoding) {
         case "iso-8859-1":
             return StandardCharsets.ISO_8859_1;
         default:
-            return encoding;
+            throw new Error(`Unknown encoding ${encoding}`);
     }
 }
 
