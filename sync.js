@@ -60,7 +60,7 @@ function renameSync(oldPath, newPath) {
     Files.move(root.resolve(oldPath), root.resolve(newPath));
 }
 
-function readDirSync(path) {
+function readdirSync(path) {
     return Files.list(root.resolve(path))
         .map(path => path.getFileName())
         .toList();
@@ -72,5 +72,5 @@ module.exports = {
     writeFileSync,
     unlinkSync,
     renameSync,
-    readDirSync,
+    readdirSync,
 }

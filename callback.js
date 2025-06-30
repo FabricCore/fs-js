@@ -57,7 +57,7 @@ function rename(oldPath, newPath, callback) {
     });
 }
 
-function readDir(path, callback) {
+function readdir(path, callback) {
     CompletableFuture.runAsync(() => {
         try {
             let res = fs.readDirSync(path);
@@ -74,5 +74,5 @@ module.exports = {
     writeFile,
     unlink,
     rename,
-    readDir
+    readdir
 };
