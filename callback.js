@@ -68,11 +68,23 @@ function readdir(path, callback) {
     });
 }
 
+function mkdir(path) {
+    CompletableFuture.runAsync(() => {
+        try {
+            let res = fs.mkdirSync(path);
+            callback(res);
+        } catch (e) {
+            callback(e);
+        }
+    });
+}
+
 module.exports = {
     readFile,
     appendFile,
     writeFile,
     unlink,
     rename,
-    readdir
+    readdir,
+    mkdir
 };

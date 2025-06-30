@@ -66,6 +66,10 @@ function readdirSync(path) {
         .toList();
 }
 
+function mkdirSync(path) {
+    return Files.createDirectories(root.resolve(path));
+}
+
 module.exports = {
     readFileSync,
     appendFileSync,
@@ -73,4 +77,5 @@ module.exports = {
     unlinkSync,
     renameSync,
     readdirSync,
+    mkdirSync
 }
