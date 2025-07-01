@@ -16,3 +16,5 @@
 - writeFileSync(path, data)
 - unlinkSync(path)
 - renameSync(oldPath, newPath)
+- isFileSync(path)
+- isDirSync(path)

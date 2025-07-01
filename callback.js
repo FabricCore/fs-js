@@ -79,6 +79,39 @@ function mkdir(path) {
     });
 }
 
+function exists(path) {
+    CompletableFuture.runAsync(() => {
+        try {
+            let res = fs.existsSync(path);
+            callback(res);
+        } catch (e) {
+            callback(e);
+        }
+    });
+}
+
+function isDir(path) {
+    CompletableFuture.runAsync(() => {
+        try {
+            let res = fs.isDirSync(path);
+            callback(res);
+        } catch (e) {
+            callback(e);
+        }
+    });
+}
+
+function isFile(path) {
+    CompletableFuture.runAsync(() => {
+        try {
+            let res = fs.isFileSync(path);
+            callback(res);
+        } catch (e) {
+            callback(e);
+        }
+    });
+}
+
 module.exports = {
     readFile,
     appendFile,
@@ -86,5 +119,8 @@ module.exports = {
     unlink,
     rename,
     readdir,
-    mkdir
+    mkdir,
+    exists,
+    isDir,
+    isFile,
 };

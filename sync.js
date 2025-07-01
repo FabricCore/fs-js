@@ -6,8 +6,7 @@ let FileUtils = org.apache.commons.io.FileUtils;
 
 let { Buffer } = module.require("./buffer");
 
-let root = FabricLoader.getInstance()
-    .getConfigDir().resolve("jscore");
+let root = FabricLoader.getInstance().getConfigDir().resolve("jscore");
 
 function readFileSync(path, encoding) {
     let bytes = Files.readAllBytes(root.resolve(path));
@@ -31,10 +30,7 @@ function appendFileSync(path, data) {
         data = new java.lang.String(data.toString()).getBytes();
     }
 
-    Files.write(
-        root.resolve(path),
-        data,
-        StandardOpenOption.APPEND);
+    Files.write(root.resolve(path), data, StandardOpenOption.APPEND);
 }
 
 function writeFileSync(path, data) {
@@ -46,10 +42,7 @@ function writeFileSync(path, data) {
         data = data.getBytes();
     }
 
-    Files.write(
-        root.resolve(path),
-        data,
-        StandardOpenOption.TRUNCATE_EXISTING);
+    Files.write(root.resolve(path), data, StandardOpenOption.TRUNCATE_EXISTING);
 }
 
 function unlinkSync(path) {
@@ -62,12 +55,24 @@ function renameSync(oldPath, newPath) {
 
 function readdirSync(path) {
     return Files.list(root.resolve(path))
-        .map(path => path.getFileName())
+        .map((path) => path.getFileName())
         .toList();
 }
 
 function mkdirSync(path) {
     return Files.createDirectories(root.resolve(path));
+}
+
+function existsSync(path) {
+    return Files.exists(root.resolve(path));
+}
+
+function isDirSync(path) {
+    return Files.isDirectory(root.resolve(path));
+}
+
+function isFileSync(path) {
+    return Files.isRegularFile(root.resolve(path));
 }
 
 module.exports = {
@@ -77,5 +82,8 @@ module.exports = {
     unlinkSync,
     renameSync,
     readdirSync,
-    mkdirSync
-}
+    mkdirSync,
+    existsSync,
+    isDirSync,
+    isFileSync,
+};
