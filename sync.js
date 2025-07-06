@@ -30,7 +30,7 @@ function appendFileSync(path, data) {
         data = new java.lang.String(data.toString()).getBytes();
     }
 
-    Files.write(root.resolve(path), data, StandardOpenOption.APPEND);
+    Files.write(root.resolve(path), data, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
 }
 
 function writeFileSync(path, data) {
@@ -42,7 +42,7 @@ function writeFileSync(path, data) {
         data = data.getBytes();
     }
 
-    Files.write(root.resolve(path), data, StandardOpenOption.TRUNCATE_EXISTING);
+    Files.write(root.resolve(path), data, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE);
 }
 
 function unlinkSync(path) {
