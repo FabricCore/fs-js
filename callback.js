@@ -35,10 +35,10 @@ function writeFile(path, data, callback) {
     });
 }
 
-function unlink(path, callback) {
+function unlink(path, recursive = true, callback) {
     CompletableFuture.runAsync(() => {
         try {
-            let res = fs.unlinkSync(path);
+            let res = fs.unlinkSync(path, recursive);
             callback(res);
         } catch (e) {
             callback(e);
@@ -112,6 +112,17 @@ function isFile(path) {
     });
 }
 
+function symlink(target, path, _, callback) {
+    CompletableFuture.runAsync(() => {
+        try {
+            let res = fs.symlinkSync(target, path);
+            callback(res);
+        } catch (e) {
+            callback(e);
+        }
+    });
+}
+
 module.exports = {
     readFile,
     appendFile,
@@ -123,4 +134,5 @@ module.exports = {
     exists,
     isDir,
     isFile,
+    symlink,
 };

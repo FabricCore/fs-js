@@ -30,7 +30,12 @@ function appendFileSync(path, data) {
         data = new java.lang.String(data.toString()).getBytes();
     }
 
-    Files.write(root.resolve(path), data, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
+    Files.write(
+        root.resolve(path),
+        data,
+        StandardOpenOption.APPEND,
+        StandardOpenOption.CREATE,
+    );
 }
 
 function writeFileSync(path, data) {
@@ -42,10 +47,19 @@ function writeFileSync(path, data) {
         data = data.getBytes();
     }
 
-    Files.write(root.resolve(path), data, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE);
+    Files.write(
+        root.resolve(path),
+        data,
+        StandardOpenOption.TRUNCATE_EXISTING,
+        StandardOpenOption.CREATE,
+    );
 }
 
-function unlinkSync(path) {
+function unlinkSync(path, recursive = true) {
+    if (!recursive) {
+        Files.delete(root.resolve(path));
+        return;
+    }
     return FileUtils.deleteQuietly(root.resolve(path).toFile());
 }
 
@@ -54,9 +68,11 @@ function renameSync(oldPath, newPath) {
 }
 
 function readdirSync(path) {
-    return Files.list(root.resolve(path))
-        .map((path) => path.getFileName())
-        .toList();
+    return Array.from(
+        Files.list(root.resolve(path))
+            .map((path) => path.getFileName())
+            .toList(),
+    );
 }
 
 function mkdirSync(path) {
@@ -75,6 +91,10 @@ function isFileSync(path) {
     return Files.isRegularFile(root.resolve(path));
 }
 
+function symlinkSync(target, path, _) {
+    Files.createSymbolicLink(root.resolve(target), root.resolve(path));
+}
+
 module.exports = {
     readFileSync,
     appendFileSync,
@@ -86,4 +106,5 @@ module.exports = {
     existsSync,
     isDirSync,
     isFileSync,
+    symlinkSync,
 };
