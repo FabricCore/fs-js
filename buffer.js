@@ -2,7 +2,7 @@ let StandardCharsets = java.nio.charset.StandardCharsets;
 
 function fromEncoding(encoding) {
     if (encoding instanceof java.lang.String) {
-        encoding = '' + encoding;
+        encoding = "" + encoding;
     }
 
     if (typeof encoding != "string") {
@@ -30,7 +30,9 @@ function Buffer(bytes) {
         _bytes: bytes,
 
         text(encoding = StandardCharsets.UTF_8) {
-            return new java.lang.String(this._bytes, fromEncoding(encoding));
+            return (
+                new java.lang.String(this._bytes, fromEncoding(encoding)) + ""
+            );
         },
 
         bytes() {
@@ -44,5 +46,5 @@ function Buffer(bytes) {
 }
 
 module.exports = {
-    Buffer
+    Buffer,
 };

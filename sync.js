@@ -13,7 +13,7 @@ function readFileSync(path, encoding) {
     let buffer = Buffer(bytes);
 
     if (encoding != undefined) {
-        return buffer.text(encoding);
+        return buffer.text(encoding) + "";
     }
 
     return buffer;
@@ -60,7 +60,7 @@ function unlinkSync(path, recursive = true) {
         Files.delete(root.resolve(path));
         return;
     }
-    return FileUtils.deleteQuietly(root.resolve(path).toFile());
+    return FileUtils.deleteQuietly(root.resolve(path).toFile()) && true;
 }
 
 function renameSync(oldPath, newPath) {
@@ -70,25 +70,25 @@ function renameSync(oldPath, newPath) {
 function readdirSync(path) {
     return Array.from(
         Files.list(root.resolve(path))
-            .map((path) => path.getFileName())
+            .map((path) => path.getFileName().toString())
             .toList(),
     );
 }
 
 function mkdirSync(path) {
-    return Files.createDirectories(root.resolve(path));
+    return Files.createDirectories(root.resolve(path)) && true;
 }
 
 function existsSync(path) {
-    return Files.exists(root.resolve(path));
+    return Files.exists(root.resolve(path)) && true;
 }
 
 function isDirSync(path) {
-    return Files.isDirectory(root.resolve(path));
+    return Files.isDirectory(root.resolve(path)) && true;
 }
 
 function isFileSync(path) {
-    return Files.isRegularFile(root.resolve(path));
+    return Files.isRegularFile(root.resolve(path)) && true;
 }
 
 function symlinkSync(target, path, _) {
