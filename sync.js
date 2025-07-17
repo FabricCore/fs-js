@@ -92,7 +92,7 @@ function isFileSync(path) {
 }
 
 function symlinkSync(target, path, _) {
-    Files.createSymbolicLink(root.resolve(target), root.resolve(path));
+    Files.createSymbolicLink(root.resolve(path), root.resolve(target));
 }
 
 module.exports = {
