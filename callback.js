@@ -112,6 +112,17 @@ function isFile(path) {
     });
 }
 
+function isSymlink(path) {
+    CompletableFuture.runAsync(() => {
+        try {
+            let res = fs.isSymlinkSync(path);
+            callback(res);
+        } catch (e) {
+            callback(e);
+        }
+    });
+}
+
 function symlink(target, path, _, callback) {
     CompletableFuture.runAsync(() => {
         try {
@@ -134,5 +145,6 @@ module.exports = {
     exists,
     isDir,
     isFile,
+    isSymlink,
     symlink,
 };

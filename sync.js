@@ -91,6 +91,10 @@ function isFileSync(path) {
     return Files.isRegularFile(root.resolve(path)) && true;
 }
 
+function isSymlinkSync(path) {
+    return Files.isSymbolicLink(root.resolve(path)) && true;
+}
+
 function symlinkSync(target, path, _) {
     Files.createSymbolicLink(root.resolve(path), root.resolve(target));
 }
@@ -106,5 +110,6 @@ module.exports = {
     existsSync,
     isDirSync,
     isFileSync,
+    isSymlinkSync,
     symlinkSync,
 };

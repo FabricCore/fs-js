@@ -21,4 +21,5 @@
 - renameSync(oldPath, newPath)
 - isFileSync(path)
 - isDirSync(path)
+- isSymlinkSync(path)
 - symlinkSync(path, target, \_)
